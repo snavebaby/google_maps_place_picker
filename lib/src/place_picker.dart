@@ -223,14 +223,6 @@ class _PlacePickerState extends State<PlacePicker> {
   Widget _buildSearchBar() {
     return Row(
       children: <Widget>[
-        // widget.automaticallyImplyAppBarLeading
-        //     ? IconButton(
-        //         onPressed: () => Navigator.maybePop(context),
-        //         icon: Icon(
-        //           Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-        //         ),
-        //         padding: EdgeInsets.zero)
-        //     : SizedBox(width: 15),
         Expanded(
           child: AutoCompleteSearch(
               appBarKey: appBarKey,
