@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
@@ -318,14 +320,18 @@ class GoogleMapPlacePicker extends StatelessWidget {
   Widget _buildLoadingIndicator() {
     return Container(
       height: 48,
-      child: const Center(
-        child: SizedBox(
-          width: 24,
-          height: 24,
-          child: CircularProgressIndicator(),
-        ),
+      child: Center(
+        child: SizedBox(width: 24, height: 24, child: _returnLoader()),
       ),
     );
+  }
+
+  Widget _returnLoader() {
+    if (Platform.isAndroid) {
+      return CircularProgressIndicator();
+    } else {
+      return CupertinoActivityIndicator();
+    }
   }
 
   Widget _buildSelectionDetails(BuildContext context, PickResult result) {
