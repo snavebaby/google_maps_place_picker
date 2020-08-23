@@ -127,6 +127,8 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
                             children: <Widget>[
                               Expanded(
                                   child: TextField(
+                                controller: controller,
+                                focusNode: focus,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter Address',
