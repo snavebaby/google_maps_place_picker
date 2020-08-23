@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -222,14 +223,14 @@ class _PlacePickerState extends State<PlacePicker> {
   Widget _buildSearchBar() {
     return Row(
       children: <Widget>[
-        widget.automaticallyImplyAppBarLeading
-            ? IconButton(
-                onPressed: () => Navigator.maybePop(context),
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                ),
-                padding: EdgeInsets.zero)
-            : SizedBox(width: 15),
+        // widget.automaticallyImplyAppBarLeading
+        //     ? IconButton(
+        //         onPressed: () => Navigator.maybePop(context),
+        //         icon: Icon(
+        //           Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+        //         ),
+        //         padding: EdgeInsets.zero)
+        //     : SizedBox(width: 15),
         Expanded(
           child: AutoCompleteSearch(
               appBarKey: appBarKey,
@@ -321,7 +322,7 @@ class _PlacePickerState extends State<PlacePicker> {
               .updateCurrentLocation(widget.forceAndroidLocationManager),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: _returnLoader());
             } else {
               if (provider.currentPosition == null) {
                 return _buildMap(widget.initialPosition);
@@ -336,12 +337,20 @@ class _PlacePickerState extends State<PlacePicker> {
         future: Future.delayed(Duration(milliseconds: 1)),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: _returnLoader());
           } else {
             return _buildMap(widget.initialPosition);
           }
         },
       );
+    }
+  }
+
+  Widget _returnLoader() {
+    if (Platform.isAndroid) {
+      return CircularProgressIndicator();
+    } else {
+      return CupertinoActivityIndicator();
     }
   }
 
