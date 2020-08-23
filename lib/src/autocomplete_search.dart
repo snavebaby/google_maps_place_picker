@@ -80,7 +80,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     controller.addListener(_onSearchInputChange);
     focus.addListener(_onFocusChanged);
 
-    widget.searchBarController.attach(this);
+    //widget.searchBarController.attach(this);
   }
 
   @override
@@ -97,26 +97,70 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: provider,
-      child: RoundedFrame(
-        height: widget.height,
-        padding: const EdgeInsets.only(right: 10),
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.black54
-            : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        elevation: 8.0,
-        child: Row(
-          children: <Widget>[
-            SizedBox(width: 10),
-            Icon(Icons.search),
-            SizedBox(width: 10),
-            Expanded(child: _buildSearchTextField()),
-            _buildTextClearIcon(),
-          ],
-        ),
-      ),
-    );
+        value: provider,
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 55,
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(.9),
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: 55,
+                  child: Card(
+                    child: IconButton(
+                        icon: Icon(Icons.menu),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                      margin: EdgeInsets.all(5),
+                      child: GestureDetector(
+                          onTap: () async {},
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                  child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Enter Address',
+                                    prefix: Icon(Icons.search),
+                                    suffixIcon: Icon(
+                                      Icons.cancel,
+                                      color: Colors.grey,
+                                    )),
+                              )),
+                              _buildTextClearIcon()
+                            ],
+                          ))),
+                )
+              ],
+            ))
+//       RoundedFrame(
+//         height: widget.height,
+//         padding: const EdgeInsets.only(right: 10),
+//         color: Theme.of(context).brightness == Brightness.dark
+//             ? Colors.black54
+//             : Colors.white,
+// //         borderRadius: BorderRadius.circular(20),
+//         elevation: 8.0,
+//         child: Row(
+//           children: <Widget>[
+//             SizedBox(width: 10),
+//             Icon(Icons.search),
+//             SizedBox(width: 10),
+//             Expanded(child: _buildSearchTextField()),
+//             _buildTextClearIcon(),
+//           ],
+//         ),
+//       ),
+        );
   }
 
   Widget _buildSearchTextField() {
