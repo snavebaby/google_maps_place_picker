@@ -110,7 +110,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
                   width: 55,
                   child: Card(
                     child: IconButton(
-                        icon: Icon(Icons.menu),
+                        icon: Icon(Icons.arrow_back_ios),
                         onPressed: () {
                           Navigator.pop(context);
                         }),
@@ -132,7 +132,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter Address',
-                                    prefix: Icon(Icons.search),
+                                    //prefix: Icon(Icons.search),
                                     suffixIcon: Icon(
                                       Icons.cancel,
                                       color: Colors.grey,
